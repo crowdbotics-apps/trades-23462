@@ -19,11 +19,9 @@ class User(AbstractUser):
         blank=True,
         max_length=255,
     )
-    group = models.ManyToManyField(
-        "course.Group",
-        blank=True,
-        related_name="user_group",
-    )
+
+    def get_absolute_url(self):
+        return reverse("users:detail", kwargs={"username": self.username})
 
     def get_absolute_url(self):
         return reverse("users:detail", kwargs={"username": self.username})
